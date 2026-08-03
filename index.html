@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klear - Cleaning Service Company</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#00adef',
+                            dark: '#1c2128', 
+                            gray: '#f4f7fc',
+                            accent: '#ffbd00' // Yellow accent often seen in these themes
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .clip-path-slant {
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+        .service-card:hover .icon-box {
+            background-color: #00adef;
+            color: white;
+            border-color: #00adef;
+        }
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-shine:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-600 antialiased">
+
+    <!-- Top Bar -->
+    <div class="bg-brand-dark text-gray-400 py-2 text-sm hidden lg:block">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex space-x-6">
+                <span class="hover:text-brand-blue transition cursor-pointer"><i class="fas fa-phone-alt mr-2 text-brand-blue"></i> +1 (800) 123-4567</span>
+                <span class="hover:text-brand-blue transition cursor-pointer"><i class="fas fa-envelope mr-2 text-brand-blue"></i> info@klear-cleaning.com</span>
+                <span><i class="far fa-clock mr-2 text-brand-blue"></i> Mon - Sat: 8:00 AM - 6:00 PM</span>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="text-3xl font-heading font-bold text-gray-800 flex items-center">
+                    <div class="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center text-white mr-2">
+                        <i class="fas fa-sparkles"></i>
+                    </div>
+                    Klear<span class="text-brand-blue">.</span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-800 font-medium hover:text-brand-blue transition">Home</a>
+                    <a href="#about" class="text-gray-600 font-medium hover:text-brand-blue transition">About</a>
+                    <a href="#services" class="text-gray-600 font-medium hover:text-brand-blue transition">Services</a>
+                    <a href="#projects" class="text-gray-600 font-medium hover:text-brand-blue transition">Projects</a>
+                    <a href="#contact" class="text-gray-600 font-medium hover:text-brand-blue transition">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#quote" class="bg-brand-blue text-white px-6 py-3 rounded-full font-medium hover:bg-sky-600 transition btn-shine shadow-lg shadow-blue-500/30">
+                        Get a Quote
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-gray-800 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <a href="#home" class="block py-3 px-6 text-gray-800 hover:bg-gray-50 border-b">Home</a>
+            <a href="#about" class="block py-3 px-6 text-gray-600 hover:bg-gray-50 border-b">About</a>
+            <a href="#services" class="block py-3 px-6 text-gray-600 hover:bg-gray-50 border-b">Services</a>
+            <a href="#projects" class="block py-3 px-6 text-gray-600 hover:bg-gray-50 border-b">Projects</a>
+            <a href="#contact" class="block py-3 px-6 text-gray-600 hover:bg-gray-50">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-gray-900 text-white min-h-[600px] flex items-center">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1581578731117-10d52143b0d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Cleaning Background" class="w-full h-full object-cover opacity-40">
+            <div class="absolute inset-0 bg-gradient-to-r from-gray-900/90 to-transparent"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 pt-10">
+            <div class="max-w-2xl animate-fade-in-up">
+                <span class="text-brand-blue font-bold tracking-wider uppercase mb-2 block">Professional Cleaning Service</span>
+                <h1 class="text-5xl md:text-6xl font-heading font-bold leading-tight mb-6">
+                    We Make Your Home <br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-300">Shine & Sparkle</span>
+                </h1>
+                <p class="text-gray-300 text-lg mb-8 leading-relaxed">
+                    Experience the joy of a spotless home with our expert cleaning team. 
+                    We provide top-notch residential and commercial cleaning services tailored to your needs.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#services" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-sky-600 transition text-center shadow-lg shadow-blue-500/40">
+                        Our Services
+                    </a>
+                    <a href="#contact" class="bg-white text-gray-900 px-8 py-4 rounded-full font-bold hover:bg-gray-100 transition text-center">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Decorative Wave Bottom -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-12 md:h-24" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M1200 120L0 16.48 0 0 1200 0 1200 120z" class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Features Info Bar (Floating) -->
+    <div class="relative z-20 -mt-16 container mx-auto px-6 mb-20 hidden lg:block">
+        <div class="grid grid-cols-3 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white p-8 rounded-lg shadow-xl flex items-start border-b-4 border-brand-blue group hover:-translate-y-2 transition duration-300">
+                <div class="text-brand-blue text-4xl mr-5 group-hover:scale-110 transition">
+                    <i class="fas fa-user-shield"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-heading mb-2">Expert Staff</h3>
+                    <p class="text-gray-500 text-sm">Our team is fully vetted, trained, and insured for your peace of mind.</p>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-brand-blue p-8 rounded-lg shadow-xl flex items-start border-b-4 border-brand-dark text-white group hover:-translate-y-2 transition duration-300">
+                <div class="text-white text-4xl mr-5 group-hover:scale-110 transition">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-heading mb-2">Affordable Prices</h3>
+                    <p class="text-blue-100 text-sm">Top-quality cleaning services that fit within your budget perfectly.</p>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white p-8 rounded-lg shadow-xl flex items-start border-b-4 border-brand-blue group hover:-translate-y-2 transition duration-300">
+                <div class="text-brand-blue text-4xl mr-5 group-hover:scale-110 transition">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold font-heading mb-2">24/7 Support</h3>
+                    <p class="text-gray-500 text-sm">We are always available to answer your questions and schedule cleanings.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row items-center gap-16">
+                <!-- Image Grid -->
+                <div class="lg:w-1/2 relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1556910103-1c02745a30bf?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About Us" class="w-full h-auto">
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -bottom-6 -right-6 w-48 h-48 bg-brand-blue/10 rounded-full z-0"></div>
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-yellow-100 rounded-full z-0"></div>
+                    
+                    <!-- Experience Badge -->
+                    <div class="absolute -bottom-8 -left-4 bg-brand-blue text-white p-6 rounded-lg shadow-xl z-20 text-center hidden md:block">
+                        <span class="block text-4xl font-bold font-heading">15+</span>
+                        <span class="text-sm font-medium">Years Experience</span>
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="lg:w-1/2">
+                    <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">About Our Company</span>
+                    <h2 class="text-4xl font-heading font-bold text-gray-800 mt-2 mb-6">We Are Professional & <br>Reliable Cleaners</h2>
+                    <p class="text-gray-500 leading-relaxed mb-6">
+                        At Klear, we understand that a clean environment is a happy environment. We have been serving the community for over 15 years, providing exceptional cleaning solutions for homes and businesses.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed mb-8">
+                        Our mission is to deliver high-quality cleaning services that exceed our clients' expectations. We use eco-friendly products and state-of-the-art equipment to ensure a spotless result every time.
+                    </p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-brand-blue mr-3 text-xl"></i> Professional & Experienced Team
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-brand-blue mr-3 text-xl"></i> 100% Satisfaction Guarantee
+                        </li>
+                        <li class="flex items-center text-gray-700">
+                            <i class="fas fa-check-circle text-brand-blue mr-3 text-xl"></i> Eco-Friendly Cleaning Products
+                        </li>
+                    </ul>
+
+                    <a href="#about" class="text-brand-blue font-bold hover:text-sky-700 transition border-b-2 border-brand-blue pb-1 inline-block">
+                        Read More About Us <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-brand-gray relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">What We Do</span>
+                <h2 class="text-4xl font-heading font-bold text-gray-800 mt-2">Our Cleaning Services</h2>
+                <div class="w-20 h-1 bg-brand-blue mx-auto mt-4"></div>
+                <p class="text-gray-500 mt-4">We offer a wide range of professional cleaning services to meet your specific needs and requirements.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">House Cleaning</h3>
+                    <p class="text-gray-500 mb-6">Deep cleaning for every room in your house. We dust, vacuum, mop, and sanitize to make your home shine.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">Office Cleaning</h3>
+                    <p class="text-gray-500 mb-6">Keep your workplace professional and hygienic. We clean desks, common areas, restrooms, and floors.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-soap"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">Carpet Cleaning</h3>
+                    <p class="text-gray-500 mb-6">Remove stubborn stains and dirt from your carpets. Our deep steam cleaning restores freshness.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-window-maximize"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">Window Cleaning</h3>
+                    <p class="text-gray-500 mb-6">Streak-free window cleaning for clear views. We handle interior and exterior windows safely.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-broom"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">Move In/Out</h3>
+                    <p class="text-gray-500 mb-6">Detailed cleaning for empty homes. Ensure you get your deposit back or move into a fresh space.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition duration-300 service-card group">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-shower"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-gray-800 mb-4 group-hover:text-brand-blue transition">Sanitization</h3>
+                    <p class="text-gray-500 mb-6">Specialized disinfection services to eliminate germs, bacteria, and viruses from surfaces.</p>
+                    <a href="#" class="text-sm font-bold text-gray-800 group-hover:text-brand-blue transition flex items-center">
+                        READ MORE <i class="fas fa-chevron-right ml-2 text-xs"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / Process -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">How It Works</span>
+                    <h2 class="text-4xl font-heading font-bold text-gray-800 mt-2 mb-8">Get Amazing Cleaning in 3 Simple Steps</h2>
+                    
+                    <div class="flex relative pb-10">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">1</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-gray-800 mb-2">Book Your Schedule</h3>
+                            <p class="text-gray-500">Call us or use our online form to choose a time that works best for you. Flexible scheduling available.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex relative pb-10">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-gray-200 pointer-events-none"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">2</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-gray-800 mb-2">We Clean & Sanitize</h3>
+                            <p class="text-gray-500">Our expert team arrives with all necessary supplies. We clean every corner with attention to detail.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex relative">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">3</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-gray-800 mb-2">Enjoy Your Clean Home</h3>
+                            <p class="text-gray-500">Walk into a fresh, sparkling home. Relax and spend your time on what truly matters to you.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-brand-blue rounded-xl p-8 lg:p-12 text-white relative overflow-hidden">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold font-heading mb-6">Why Choose Klear?</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-white text-brand-blue p-1 rounded-full text-xs mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold">Transparent Pricing</h4>
+                                        <p class="text-blue-100 text-sm mt-1">No hidden fees. You know exactly what you pay for.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-white text-brand-blue p-1 rounded-full text-xs mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold">Insured & Bonded</h4>
+                                        <p class="text-blue-100 text-sm mt-1">We are fully insured for your protection and peace of mind.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-white text-brand-blue p-1 rounded-full text-xs mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold">Eco-Friendly Tools</h4>
+                                        <p class="text-blue-100 text-sm mt-1">Safe for pets and children. We care about your health.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-white text-brand-blue p-1 rounded-full text-xs mt-1 mr-3"></i>
+                                    <div>
+                                        <h4 class="font-bold">Satisfaction Guaranteed</h4>
+                                        <p class="text-blue-100 text-sm mt-1">If you aren't happy, we come back and fix it for free.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Decor -->
+                        <i class="fas fa-sparkles text-white opacity-10 text-9xl absolute -bottom-10 -right-10 rotate-12"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section (Parallax-like) -->
+    <section class="py-16 bg-brand-dark text-white relative">
+        <div class="absolute inset-0 z-0">
+             <img src="https://images.unsplash.com/photo-1527515545081-5db817172677?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Stats BG" class="w-full h-full object-cover opacity-10">
+        </div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">2500+</div>
+                    <div class="text-gray-400 uppercase tracking-widest text-sm font-medium">Projects Done</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">1500+</div>
+                    <div class="text-gray-400 uppercase tracking-widest text-sm font-medium">Happy Clients</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">80+</div>
+                    <div class="text-gray-400 uppercase tracking-widest text-sm font-medium">Experts</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">15+</div>
+                    <div class="text-gray-400 uppercase tracking-widest text-sm font-medium">Awards Won</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-brand-blue">
+        <div class="container mx-auto px-6 text-center text-white">
+            <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6">Let's Make Your Home Cleaner!</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">Call us today for a free estimate or book your cleaning service online in just a few clicks.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-white text-brand-blue px-10 py-4 rounded-full font-bold hover:bg-gray-100 transition shadow-lg">
+                    Book Now
+                </a>
+                <a href="tel:123456789" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-brand-blue transition">
+                    Call: (800) 123-4567
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-gray-400 pt-20 pb-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand Info -->
+                <div>
+                    <a href="#" class="text-3xl font-heading font-bold text-white flex items-center mb-6">
+                        <div class="w-8 h-8 bg-brand-blue rounded-full flex items-center justify-center text-white mr-2 text-sm">
+                            <i class="fas fa-sparkles"></i>
+                        </div>
+                        Klear.
+                    </a>
+                    <p class="mb-6 leading-relaxed text-sm">
+                        Klear is a premium cleaning service company dedicated to making your life easier. We provide reliable and efficient cleaning solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Quick Links</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-brand-blue transition">About Company</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Our Services</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Pricing Plan</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Our Team</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Links -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Our Services</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-brand-blue transition">House Cleaning</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Office Cleaning</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Window Cleaning</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Carpet Cleaning</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Move In / Out</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Get In Touch</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-brand-blue mt-1 mr-3"></i>
+                            <span>123 Clean Street, Suite 100,<br>New York, NY 10012</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-brand-blue mr-3"></i>
+                            <span>+1 (800) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-brand-blue mr-3"></i>
+                            <span>info@klear-cleaning.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="far fa-clock text-brand-blue mr-3"></i>
+                            <span>Mon - Sat: 8:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 Klear Cleaning Service. All Rights Reserved. Designed by AI.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Sticky Navbar Effect (Optional enhancement)
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 0) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
