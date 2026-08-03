@@ -1,0 +1,6 @@
+{
+  "name": "MARC - Robotics & Automation Club",
+  "description": "Official website for MARC (Robotics & Automation Lab, Mechanical Engineering Dept), featuring projects, news, members, events, gallery, resources, and membership application.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
