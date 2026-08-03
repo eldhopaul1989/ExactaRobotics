@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ExactaRobotics - Robot Calibration & Precision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            blue: '#00adef',
+                            dark: '#0f172a', // Slate 900
+                            gray: '#f4f7fc',
+                            accent: '#ffbd00'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        heading: ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .service-card:hover .icon-box {
+            background-color: #00adef;
+            color: white;
+            border-color: #00adef;
+        }
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        .btn-shine:hover::after {
+            left: 100%;
+        }
+    </style>
+</head>
+<body class="font-sans text-slate-300 antialiased bg-slate-950">
+
+    <!-- Top Bar (Dark Slate) -->
+    <div class="bg-slate-900 text-slate-400 py-2 text-sm hidden lg:block border-b border-slate-800">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex space-x-6">
+                <span class="hover:text-brand-blue transition cursor-pointer"><i class="fas fa-phone-alt mr-2 text-brand-blue"></i> +1 (800) 123-4567</span>
+                <span class="hover:text-brand-blue transition cursor-pointer"><i class="fas fa-envelope mr-2 text-brand-blue"></i> info@exactarobotics.com</span>
+                <span><i class="far fa-clock mr-2 text-brand-blue"></i> Mon - Fri: 9:00 AM - 6:00 PM</span>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#" class="hover:text-brand-blue transition"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation (Dark Slate) -->
+    <nav class="bg-slate-900 shadow-md sticky top-0 z-50 border-b border-slate-800">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center">
+                    <img src="drawYGiddnJg-1.png" alt="ExactaRobotics Logo" class="h-20 mr-3">
+                    <span class="text-3xl font-heading font-bold text-white"><span class="text-brand-blue"></span></span>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-white font-medium hover:text-brand-blue transition">Home</a>
+                    <a href="#about" class="text-slate-300 font-medium hover:text-brand-blue transition">About</a>
+                    <a href="#services" class="text-slate-300 font-medium hover:text-brand-blue transition">Solutions</a>
+                    <a href="#team" class="text-slate-300 font-medium hover:text-brand-blue transition">Team</a>
+                    <a href="#contact" class="text-slate-300 font-medium hover:text-brand-blue transition">Contact</a>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="bg-brand-blue text-white px-6 py-3 rounded-full font-medium hover:bg-sky-600 transition btn-shine shadow-lg shadow-blue-500/30">
+                        Get a Quote
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800">
+            <a href="#home" class="block py-3 px-6 text-white hover:bg-slate-800 border-b border-slate-800">Home</a>
+            <a href="#about" class="block py-3 px-6 text-slate-300 hover:bg-slate-800 border-b border-slate-800">About</a>
+            <a href="#services" class="block py-3 px-6 text-slate-300 hover:bg-slate-800 border-b border-slate-800">Solutions</a>
+            <a href="#team" class="block py-3 px-6 text-slate-300 hover:bg-slate-800 border-b border-slate-800">Team</a>
+            <a href="#contact" class="block py-3 px-6 text-slate-300 hover:bg-slate-800">Contact</a>
+        </div>
+    </nav>
+
+    <!-- 1. Hero Section (DARKER - Slate 950) -->
+    <section id="home" class="relative bg-slate-950 text-white min-h-[600px] flex items-center overflow-hidden">
+        <!-- Background Image with Overlay -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="Robotics Background" class="w-full h-full object-cover opacity-20">
+            <div class="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/90 to-slate-950/60"></div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 pt-10 pb-20">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <!-- Left Text Content -->
+                <div class="lg:w-1/2 animate-fade-in-up">
+                    <span class="text-brand-blue font-bold tracking-wider uppercase mb-2 block">Advanced Calibration Solutions</span>
+                    <h1 class="text-4xl md:text-6xl font-heading font-bold leading-tight mb-6">
+                        Enhancing Precision in <br>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-cyan-300">Industrial Robotics</span>
+                    </h1>
+                    <p class="text-slate-300 text-lg mb-8 leading-relaxed">
+                        We specialize in enhancing the precision and reliability of industrial and collaborative robots through advanced calibration and accuracy control solutions.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#services" class="bg-brand-blue text-white px-8 py-4 rounded-full font-bold hover:bg-sky-600 transition text-center shadow-lg shadow-blue-500/40">
+                            Our Solutions
+                        </a>
+                        <a href="#contact" class="bg-slate-800 text-white px-8 py-4 rounded-full font-bold hover:bg-slate-700 transition text-center border border-slate-700">
+                            Contact Us
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Image Content -->
+                <div class="lg:w-1/2 animate-fade-in-up delay-100">
+                    <div class="relative group">
+                        <!-- Glow effect behind image -->
+                        <div class="absolute -inset-1 bg-gradient-to-r from-brand-blue to-cyan-300 rounded-lg blur opacity-30 animate-pulse group-hover:opacity-50 transition duration-500"></div>
+                        
+                        <!-- Image container with relative positioning for overlays -->
+                        <div class="relative rounded-lg overflow-hidden border border-slate-700 shadow-2xl transform group-hover:scale-[1.02] transition duration-500">
+                            <img src="Robot.png" alt="Robotic Calibration" class="w-full h-auto object-cover relative z-10">
+                            
+                            <!-- Gradient Overlays for Blending -->
+                            <div class="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-transparent to-slate-950/80 z-20 pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent z-20 pointer-events-none"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. About Section (LIGHTER - Slate 900) -->
+    <section id="about" class="py-16 md:py-24 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="max-w-5xl mx-auto text-center">
+                <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">About ExactaRobotics</span>
+                <h2 class="text-4xl font-heading font-bold text-white mt-2 mb-8">Advanced Calibration & <br>Accuracy Control</h2>
+                
+                <p class="text-slate-400 leading-relaxed mb-6 text-lg">
+                    At ExactaRobotics, our services focus on identifying, modeling, and compensating for geometric, non-geometric, and thermal errors that affect robot performance in manufacturing and automation environments.
+                </p>
+                <p class="text-slate-400 leading-relaxed mb-12 text-lg">
+                    Using state-of-the-art measurement systems (such as laser trackers, photogrammetry, and 3D vision sensors) and model-based optimization techniques, we provide customized calibration tailored to each robot type and task.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                    <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-crosshairs text-brand-blue text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 text-xl">Reduce Errors</h4>
+                        <p class="text-slate-400">Minimize positional and orientation errors in complex robotic systems.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-microchip text-brand-blue text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 text-xl">Improve Precision</h4>
+                        <p class="text-slate-400">Enhance tool-path precision for machining and assembly.</p>
+                    </div>
+                    <div class="bg-slate-800 p-8 rounded-xl border border-slate-700 shadow-lg hover:-translate-y-1 transition duration-300">
+                        <div class="w-14 h-14 bg-slate-700 rounded-full flex items-center justify-center mb-6">
+                            <i class="fas fa-project-diagram text-brand-blue text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-white mb-2 text-xl">Coordination</h4>
+                        <p class="text-slate-400">Enable multi-robot coordination with high repeatability.</p>
+                    </div>
+                </div>
+
+                <div class="mt-12">
+                    <a href="#services" class="text-brand-blue font-bold hover:text-sky-400 transition border-b-2 border-brand-blue pb-1 inline-block">
+                        Explore Our Solutions <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Services Section (DARKER - Slate 950) -->
+    <section id="services" class="py-20 bg-slate-950 relative">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">Our Capabilities</span>
+                <h2 class="text-4xl font-heading font-bold text-white mt-2">Calibration Solutions</h2>
+                <div class="w-20 h-1 bg-brand-blue mx-auto mt-4"></div>
+                <p class="text-slate-400 mt-4">Whether you operate a single industrial manipulator or an integrated robotic cell, we ensure maximum accuracy and efficiency.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Absolute Accuracy</h3>
+                    <p class="text-slate-400 mb-6">Ensuring real-world movements match programmed trajectories with minimal deviation.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-temperature-high"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Error Compensation</h3>
+                    <p class="text-slate-400 mb-6">Identifying and compensating for geometric, non-geometric, and thermal errors in complex environments.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Tool-Path Precision</h3>
+                    <p class="text-slate-400 mb-6">Improving precision for critical machining, assembly, and forming operations.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-network-wired"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Multi-Robot Coord</h3>
+                    <p class="text-slate-400 mb-6">Enabling multi-robot coordination with high repeatability for synchronized tasks.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Advanced Measurement</h3>
+                    <p class="text-slate-400 mb-6">Utilization of laser trackers, photogrammetry, and 3D vision sensors for data capture.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-slate-900 p-8 rounded-lg shadow-md hover:shadow-xl hover:shadow-brand-blue/10 transition duration-300 service-card group border border-slate-800">
+                    <div class="w-16 h-16 border-2 border-brand-blue rounded-full flex items-center justify-center text-brand-blue text-2xl mb-6 icon-box transition duration-300">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-4 group-hover:text-brand-blue transition">Performance Optimization</h3>
+                    <p class="text-slate-400 mb-6">Minimize downtime and improve production quality through model-based optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Process Section (LIGHTER - Slate 900) -->
+    <section class="py-20 bg-slate-900">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">Our Process</span>
+                    <h2 class="text-4xl font-heading font-bold text-white mt-2 mb-8">Achieving Precision in 3 Steps</h2>
+                    
+                    <div class="flex relative pb-10">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-slate-800 pointer-events-none"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">1</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-white mb-2">Identify Errors</h3>
+                            <p class="text-slate-400">We analyze your system using laser trackers and 3D vision to detect geometric and thermal deviations.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex relative pb-10">
+                        <div class="h-full w-10 absolute inset-0 flex items-center justify-center">
+                            <div class="h-full w-1 bg-slate-800 pointer-events-none"></div>
+                        </div>
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">2</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-white mb-2">Model & Compensate</h3>
+                            <p class="text-slate-400">Our team applies model-based optimization to correct robot parameters and compensation tables.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex relative">
+                        <div class="flex-shrink-0 w-10 h-10 rounded-full bg-brand-blue inline-flex items-center justify-center text-white relative z-10 font-bold">3</div>
+                        <div class="flex-grow pl-6">
+                            <h3 class="font-bold font-heading text-xl text-white mb-2">Optimize Performance</h3>
+                            <p class="text-slate-400">The calibrated system is deployed for maximum accuracy, repeatability, and efficiency.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <!-- Card background to Slate 800 -->
+                    <div class="bg-slate-800 rounded-xl p-8 lg:p-12 text-white relative overflow-hidden shadow-2xl border border-slate-700">
+                        <div class="relative z-10">
+                            <h3 class="text-2xl font-bold font-heading mb-6">Why ExactaRobotics?</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-slate-700 text-brand-blue p-1 rounded-full text-xs mt-1 mr-3 border border-slate-600"></i>
+                                    <div>
+                                        <h4 class="font-bold">Absolute Accuracy</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Real-world movements match programmed trajectories.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-slate-700 text-brand-blue p-1 rounded-full text-xs mt-1 mr-3 border border-slate-600"></i>
+                                    <div>
+                                        <h4 class="font-bold">State-of-the-Art Tech</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Laser trackers, photogrammetry, and 3D vision.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-slate-700 text-brand-blue p-1 rounded-full text-xs mt-1 mr-3 border border-slate-600"></i>
+                                    <div>
+                                        <h4 class="font-bold">Customized Calibration</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Tailored solutions for your specific robot type.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-check bg-slate-700 text-brand-blue p-1 rounded-full text-xs mt-1 mr-3 border border-slate-600"></i>
+                                    <div>
+                                        <h4 class="font-bold">Maximize Efficiency</h4>
+                                        <p class="text-slate-400 text-sm mt-1">Minimize downtime and improve production quality.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Decor -->
+                        <i class="fas fa-robot text-brand-blue opacity-10 text-9xl absolute -bottom-10 -right-10 rotate-12"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Team Section (DARKER - Slate 950) -->
+    <section id="team" class="py-20 bg-slate-950 relative border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-blue font-bold uppercase tracking-wider text-sm">Our Experts</span>
+                <h2 class="text-4xl font-heading font-bold text-white mt-2">Meet The Team</h2>
+                <div class="w-20 h-1 bg-brand-blue mx-auto mt-4"></div>
+                <p class="text-slate-400 mt-4">The minds behind our precision engineering and advanced robotics solutions.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+                <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg group border border-slate-800">
+                    <div class="h-96 bg-slate-800 relative overflow-hidden">
+                        <img src="Eldho.jpeg" alt="Eldho" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h4 class="text-xl font-bold text-white mb-1">Eldho Paul</h4>
+                        <p class="text-brand-blue text-sm mb-4">Lead Calibration Engineer</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                             </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg group border border-slate-800">
+                    <div class="h-96 bg-slate-800 relative overflow-hidden">
+                        <img src="Sahil.jpeg" alt="Sahil" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h4 class="text-xl font-bold text-white mb-1">Sahil Bharti</h4>
+                        <p class="text-brand-blue text-sm mb-4">Operations Head</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                            </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 rounded-lg overflow-hidden shadow-lg group border border-slate-800">
+                    <div class="h-96 bg-slate-800 relative overflow-hidden">
+                        <img src="Bibin.jpeg" alt="Bibin Paul" class="w-full h-full object-cover object-top group-hover:scale-110 transition duration-500">
+                    </div>
+                    <div class="p-6 text-center">
+                        <h4 class="text-xl font-bold text-white mb-1">Bibin Paul</h4>
+                        <p class="text-brand-blue text-sm mb-4">Technology Head</p>
+                        <div class="flex justify-center space-x-3">
+                            <a href="#" class="text-slate-400 hover:text-white transition"><i class="fab fa-linkedin"></i></a>
+                            
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Statistics Section (LIGHTER - Slate 900) -->
+    <section class="py-16 bg-slate-900 relative border-t border-slate-800">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">500+</div>
+                    <div class="text-slate-300 uppercase tracking-widest text-sm font-medium">Robots Calibrated</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">100%</div>
+                    <div class="text-slate-300 uppercase tracking-widest text-sm font-medium">Accuracy Improved</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">50+</div>
+                    <div class="text-slate-300 uppercase tracking-widest text-sm font-medium">Factories Optimized</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold font-heading text-brand-blue mb-2">24/7</div>
+                    <div class="text-slate-300 uppercase tracking-widest text-sm font-medium">Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CTA Section (BRAND BLUE) -->
+    <section class="py-20 bg-brand-blue">
+        <div class="container mx-auto px-6 text-center text-white">
+            <h2 class="text-3xl md:text-5xl font-heading font-bold mb-6">Maximize Your Robot's Potential</h2>
+            <p class="text-xl text-blue-100 mb-10 max-w-2xl mx-auto">ExactaRobotics ensures your systems perform at maximum accuracy and efficiency. Contact us for a consultation.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#contact" class="bg-slate-900 text-white px-10 py-4 rounded-full font-bold hover:bg-slate-800 transition shadow-lg border border-slate-700">
+                    Schedule Calibration
+                </a>
+                <a href="mailto:info@exactarobotics.com" class="border-2 border-white text-white px-10 py-4 rounded-full font-bold hover:bg-white hover:text-brand-blue transition">
+                    Email Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (VERY DARK SLATE) -->
+    <footer class="bg-slate-950 text-slate-400 pt-20 pb-10 border-t border-slate-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+                <!-- Brand Info -->
+                <div>
+                    <a href="#" class="text-3xl font-heading font-bold text-white flex items-center mb-6">
+                        <img src="drawYGiddnJg-1.png" alt="ExactaRobotics Logo" class="h-12 mr-2">
+                        
+                    </a>
+                    <p class="mb-6 leading-relaxed text-sm">
+                        ExactaRobotics is a leader in industrial robot calibration and accuracy control solutions. We bring precision to automation.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-brand-blue hover:text-white transition"><i class="fab fa-youtube"></i></a>
+                        
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Company</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-brand-blue transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Case Studies</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services Links -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Solutions</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-brand-blue transition">Robot Calibration</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Error Compensation</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Tool-Path Precision</a></li>
+                        <li><a href="#" class="hover:text-brand-blue transition">Multi-Robot Coord</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h4 class="text-white font-bold text-lg mb-6 font-heading">Get In Touch</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-brand-blue mt-1 mr-3"></i>
+                            <span>123 Precision Way, Tech Park,<br>Robotics City, RC 54321</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-brand-blue mr-3"></i>
+                            <span>+1 (800) 123-4567</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-brand-blue mr-3"></i>
+                            <span>info@exactarobotics.com</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="far fa-clock text-brand-blue mr-3"></i>
+                            <span>Mon - Fri: 9:00 AM - 6:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-slate-800 pt-8 text-center text-sm">
+                <p>&copy; 2025 ExactaRobotics. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Sticky Navbar Effect (Optional enhancement)
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 0) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
